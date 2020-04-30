@@ -17,7 +17,7 @@
     "uglify-es": "squash dist/redom.es.js -o dist/redom.es.min.js",
     "preversion": "npm run build && npm run uglify && npm run test",
     "postversion": "git push --tags",
-    "prepublish": "npm run build && npm run uglify && npm run test",
+    "prepublish": "npm run snyk-protect && npm run build && npm run uglify && npm run test",
     "postpublish": "npm run dist",
     "fixlint": "semistandard 'src/**/*.js' 'test/test.js' --fix",
     "lint": "semistandard 'src/**/*.js' 'test/test.js'",
@@ -26,7 +26,8 @@
     "nocoverage": "semistandard src/index.js && rollup -c -n redom -f cjs src/index.js -o test/redom.js && browserify test/index.js | tape-run",
     "justtest": "browserify -t coverify test/index.js | tape-run | coverify",
     "build-doc": "node build-doc",
-    "postinstall": "opencollective postinstall"
+    "postinstall": "opencollective postinstall",
+    "snyk-protect": "snyk protect"
   },
   "repository": {
     "type": "git",
@@ -60,11 +61,13 @@
     "uglify-js": "~3.3.12"
   },
   "dependencies": {
-    "opencollective": "^1.0.3"
+    "opencollective": "^1.0.3",
+    "snyk": "^1.316.1"
   },
   "collective": {
     "type": "opencollective",
     "url": "https://opencollective.com/redom",
     "logo": "https://opencollective.com/redom/logo.txt"
-  }
+  },
+  "snyk": true
 }
